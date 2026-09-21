@@ -1,0 +1,122 @@
+
+
+body {
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f6f0;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F9F6EE;
+    box-shadow: 6px 6px 0px #000000; /* Offset X, Offset Y, Blur, Warna */
+    border: 3px solid black;
+    padding: 8px;
+    border-radius: 12px;
+
+}
+
+.header {
+    background-color: #F9F6EE;
+    border: 2px solid black;
+    text-align: center;
+    padding: 0;
+    width: 550px;
+    border-bottom: none;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.content {
+    background-color: #F9F6EE;
+    border: 2px solid black;
+    padding: 16px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+
+
+}
+
+p {
+    color: grey;
+   
+
+}
+
+input {
+    padding: 8px;
+    width: 400px;
+
+    border: 2px solid black;
+    border-radius: 12px;
+
+    margin: 8px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    margin: 8px;
+}
+
+form {
+    display: flex;
+
+}
+
+.option {
+    display: flex;
+    align-self: flex-start;
+
+}
+
+.option div {
+    padding: 8px;
+    background-color: white;
+    border-radius: 16px;
+    border: 2px solid black;
+    margin: 8px;
+
+}
+
+.kegiatan {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    margin: 8px;
+    
+
+}
+
+.kegiatan div {
+    background-color: white;
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px #000000;
+    margin: 8px;
+    font-size: 15px;
+    padding: 16px;
+    width: 450px;
+
+    
+
+}
+
