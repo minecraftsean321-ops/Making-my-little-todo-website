@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     background-color: #F9F6EE;
     box-shadow: 6px 6px 0px #000000; /* Offset X, Offset Y, Blur, Warna */
     border: 3px solid black;
@@ -24,27 +25,26 @@ body {
 }
 
 .header {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 105%;
     background-color: #F9F6EE;
-    border: 2px solid black;
-    text-align: center;
+    border-bottom: 2px solid black;
     padding: 0;
-    border-bottom: none;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    margin: 16px;
 }
 
 .content {
     background-color: #F9F6EE;
     border: 2px solid black;
     padding: 16px;
-    margin: 0px;
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-radius: 12px;
 
 }
 
@@ -63,7 +63,7 @@ p {
 
 input {
     padding: 8px;
-    width: 400px;
+    width: 500px;
 
     border: 2px solid black;
     border-radius: 12px;
@@ -73,9 +73,20 @@ input {
 
 button {
     background-color: black;
+    cursor: pointer;
     color: white;
     border-radius: 12px;
     margin: 8px;
+}
+
+button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #000;
+}
+
+button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000;
 }
 
 form {
@@ -86,6 +97,7 @@ form {
 .option {
     display: flex;
     align-self: flex-start;
+    cursor: pointer;
 
 }
 
@@ -94,7 +106,24 @@ form {
     background-color: white;
     border-radius: 16px;
     border: 2px solid black;
-    margin: 8px;
+    margin: 4px;
+    margin-left: 16px;
+
+}
+
+.option div:hover {
+   transform: translate(-1px, -1px);
+   box-shadow: 3px 3px 0px #000;
+}
+
+.option div:active {
+   transform: translate(1px, 1px);
+   box-shadow: 1px 1px 0px #000;
+}
+
+.option .All {
+    background-color: #000000;
+    color: white;
 
 }
 
@@ -114,12 +143,20 @@ form {
     border-radius: 12px;
     margin: 8px;
     font-size: 15px;
-    padding: 8px;
-    width: 450px;
+    padding: 2px;
+    width: 575px;
 
 }
 
 ul {
     list-style-type: none;
+}
+
+li {
+    background-color: #F9F6EE;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 8px;
+
 }
 

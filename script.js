@@ -2,45 +2,119 @@ const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 
-//Menambahkan event listener
+const semuaList = document.getElementById("semuaList");
+const belumList = document.getElementById("belumList");
+const selesaiList = document.getElementById("selesaiList");
+
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
+let currentFilter = 'all';
+
+function updateLocalStorage () {
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+}
+
+semuaList.addEventListener("click", () => {
+    currentFilter = 'all';
+    renderTodos();
+});
+
+selesaiList.addEventListener("click", () => {
+
+    currentFilter = 'completed';
+    renderTodos();
+
+});
+
+belumList.addEventListener("click", () => {
+    currentFilter='active';
+    renderTodos();          
+
+}); 
+
+// 2. Fungsi untuk merender seluruh todo dari array `todos` ke HTML
+function renderTodos() {
+    taskList.innerHTML = ""; // Bersihkan list sebelum render ulang
+
+    // Filter array todos berdasarkan status currentFilter
+    const filteredTodos = todos.filter(todo => {
+        if (currentFilter === 'completed') {
+            return todo.completed === true;
+        } else if (currentFilter === 'active') {
+            return todo.completed === false;
+        }
+        return true; // jika 'all', tampilkan semua
+    });
+
+    // Iterasi menggunakan filteredTodos (bukan todos langsung)
+    filteredTodos.forEach((todo) => {
+        const li = document.createElement("li");
+        li.classList.add("kegiatan");
+
+        // <span> untuk menyimpan text
+        const span = document.createElement("span");
+        span.textContent = todo.text;
+
+        // Status selesai (line-through) jika diklik
+        if (todo.completed) {
+            span.style.textDecoration = "line-through";
+        }
+
+        // Toggle status selesai
+        span.addEventListener("click", () => {
+            todo.completed = !todo.completed;
+            updateLocalStorage();
+            renderTodos();
+        });
+
+        // Tombol Delete
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+
+        deleteBtn.addEventListener("click", () => {
+            deleteTodo(todo.id);
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        taskList.appendChild(li);
+    });
+}
+    
+
+
+// 3. Fungsi Tambah Todo
 addBtn.addEventListener("click", () => {
     const text = taskInput.value.trim();
 
-    //Mengecek apakah input di text kosong atau tidak
-    if (text == "") {
+    if (text === "") {
         alert("Input tidak boleh kosong!");
         return;
-
     }
 
-    //Buat elemen <li> baru
-    const li = document.createElement("li");
-    li.classList.add("kegiatan");
+    // Buat objek todo baru
+    const newTodo = {
+        id: Date.now(), // ID unik menggunakan timestamp
+        text: text,
+        completed: false
+    };
 
-    //<span> untuk menyimpan text
-    const span = document.createElement("span");
-    span.textContent = text;
+    todos.push(newTodo);      // Masukkan ke array
+    updateLocalStorage();      // Simpan ke localStorage
+    renderTodos();             // Render ulang UI
 
-    // Fitur Bonus (opsional): Klik teks task untuk mencoret (line-through)
-    span.addEventListener("click", () => {
-    span.style.textDecoration = span.style.textDecoration === "line-through" ? "none" : "line-through";
-    });
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-
-    //Ketika delete diklik hapus item dari list
-    deleteBtn.addEventListener("click", () => {
-        taskList.removeChild(li);
-    });
-
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
-
-    //Masukkan <li> ke dalam <ul>
-    taskList.appendChild(li);
-
-    //Kosongkan kembali input field setelah berhasil menambah task
-    taskInput.value = "";
-
+    taskInput.value = "";      // Kosongkan input
 });
+
+// 4. Fungsi Hapus Todo berdasarkan ID
+function deleteTodo(id) {
+    todos = todos.filter(todo => todo.id !== id); // Filter array
+    updateLocalStorage();                         // Sync ke localStorage
+    renderTodos();                                // Render ulang UI
+}
+
+// 5. Render pertama kali saat halaman selesai di-load / refresh
+document.addEventListener('DOMContentLoaded', () => {
+    renderTodos();
+});
+ 
